@@ -67,10 +67,26 @@ block body
       div.form-group(class!='<%- errfor.email ? "has-error" : "" %>')
         label Enter Your Email:
         input.form-control(type='text', name='email', value!='<%= email %>')
+        span <%- console.log(email) %>	
         span.help-block <%- errfor.email %>
       div.form-group(class!='<%- errfor.password ? "has-error" : "" %>')
         label Create a Password:
         input.form-control(type='password', name='password', value!='<%= password %>')
         span.help-block <%- errfor.password %>
-      div.form-group
-        button.btn.btn-primary.btn-signup(type='button') Create My Account
+      div.form-group(class!='<%- errfor.stunServer ? "has-error" : "" %>')
+        label STUN Server (optional):
+        input.form-control(type='text', name='stunServer',value!='<%= stunServer %>')
+        span.help-block <%- errfor.stunServer %>
+      div.form-group(class!='<%- errfor.stunServer ? "has-error" : "" %>')
+        label Turn Server (optional):
+        input.form-control(type='text', name='turnServer',value!='<%= turnServer %>')
+        span.help-block <%- errfor.turnServer %>
+      div.form-group(class!='<%- errfor.turnUser ? "has-error" : "" %>')
+        label Turn Username (optional):
+        input.form-control(type='text', name='turnUsername',value!='<%= turnUsername %>' )
+        span.help-block <%- errfor.turnUser %>
+      div.form-group(class!='<%- errfor.turnPassword ? "has-error" : "" %>')
+        label Turn Password (optional):
+        input.form-control(type='password', name='turnPassword',value!='<%= turnPassword %>')
+        span.help-block <%- errfor.turnPassword %>
+      button.btn.btn-primary.btn-signup(type='button') Create My Account

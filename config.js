@@ -1,11 +1,11 @@
 'use strict';
 
-exports.port = process.env.PORT || 80;
+exports.port = process.env.PORT || 3000;
 exports.mongodb = {
   uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'localhost/drywall'
 };
-exports.companyName = 'WebRTC Tester';
-exports.projectName = 'WebRTC Tester';
+exports.companyName = 'WebRTC Works';
+exports.projectName = 'WebRTC Works';
 exports.systemEmail = 'no-reply@web1.webrtc.works';
 exports.cryptoKey = 'X0rIkIzighl5%';
 exports.loginAttempts = {

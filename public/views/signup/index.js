@@ -12,7 +12,11 @@
       errfor: {},
       username: '',
       email: '',
-      password: ''
+      password: '',
+      stunServer: '',
+      turnServer: '',
+      turnUsername: '',
+      turnPassword: ''
     }
   });
 
@@ -44,11 +48,15 @@
     },
     signup: function() {
       this.$el.find('.btn-signup').attr('disabled', true);
-
+	console.log(this.$el.find('[name="stunServer"]'));
       this.model.save({
         username: this.$el.find('[name="username"]').val(),
         email: this.$el.find('[name="email"]').val(),
-        password: this.$el.find('[name="password"]').val()
+        password: this.$el.find('[name="password"]').val(),
+        stunServer: this.$el.find('[name="stunServer"]').val(),
+        turnServer: this.$el.find('[name="turnServer"]').val(),
+        turnUsername: this.$el.find('[name="turnUsername"]').val(),
+        turnPassword: this.$el.find('[name="turnPassword"]').val()
       },{
         success: function(model, response) {
           if (response.success) {
