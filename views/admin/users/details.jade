@@ -49,6 +49,23 @@ block body
         label Email:
         input.form-control(type='text', name='email', value!='<%= email %>')
         span.help-block <%- errfor.email %>
+      div.form-group(class!='<%- errfor.stunServer ? "has-error" : "" %>')
+        label STUN Server (optional):
+        input.form-control(type='text', name='stunServer',value!='<%= stunServer %>')
+        span.help-block <%- errfor.stunServer %>
+      div.form-group(class!='<%- errfor.stunServer ? "has-error" : "" %>')
+        label Turn Server (optional):
+        input.form-control(type='text', name='turnServer',value!='<%= turnServer %>')
+        span.help-block <%- errfor.turnServer %>
+      div.form-group(class!='<%- errfor.turnUser ? "has-error" : "" %>')
+        label Turn Username (optional):
+        input.form-control(type='text', name='turnUsername',value!='<%= turnUsername %>' )
+        span.help-block <%- errfor.turnUser %>
+      div.form-group(class!='<%- errfor.turnPassword ? "has-error" : "" %>')
+        label Turn Password (optional):
+        input.form-control(type='password', name='turnPassword',value!='<%= turnPassword %>')
+        span.help-block <%- errfor.turnPassword %>
+
       div.form-group
         button.btn.btn-primary.btn-update(type='button') Update
 
