@@ -32,11 +32,7 @@
       errfor: {},
       isActive: '',
       username: '',
-      email: '',
-      stunServer: '',
-      turnServer: '',
-      turnUsername: '',
-      turnPassword: ''
+      email: ''
     },
     url: function() {
       return '/admin/users/'+ app.mainView.model.id +'/';
@@ -127,11 +123,7 @@
         _id: app.mainView.model.id,
         isActive: app.mainView.model.get('isActive'),
         username: app.mainView.model.get('username'),
-        email: app.mainView.model.get('email'),
-	stunServer: app.mainView.model.get('stunServer'),
-	turnServer: app.mainView.model.get('turnServer'),
-	turnUsername: app.mainView.model.get('turnUsername'),
-	turnPassword: app.mainView.model.get('turnPassword')
+        email: app.mainView.model.get('email')
       });
     },
     render: function() {

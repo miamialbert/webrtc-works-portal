@@ -142,6 +142,7 @@ exports = module.exports = function(app, passport) {
   app.all('/account*', ensureAuthenticated);
   app.all('/account*', ensureAccount);
   app.get('/account/', require('./views/account/index').init);
+  app.post('/account/',require('./views/account/index').createServer);
 
   //account > verification
   app.get('/account/verification/', require('./views/account/verification/index').init);
@@ -170,6 +171,14 @@ exports = module.exports = function(app, passport) {
   app.get('/account/settings/tumblr/', passport.authenticate('tumblr', { callbackURL: '/account/settings/tumblr/callback/' }));
   app.get('/account/settings/tumblr/callback/', require('./views/account/settings/index').connectTumblr);
   app.get('/account/settings/tumblr/disconnect/', require('./views/account/settings/index').disconnectTumblr);
+
+  //servers
+  app.get('/servers/', require('./views/servers/index').find);
+  app.post('servers/', require('./views/servers/index').create);
+  app.get('/servers/:id/', require('./views/servers/index').read);
+  app.put('/servers/:id/', require('./views/servers/index').update);
+  app.delete('/servers/:id/', require('./views/servers/index').delete);
+
 
   //route not found
   app.all('*', require('./views/http/index').http404);

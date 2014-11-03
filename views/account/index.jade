@@ -10,37 +10,36 @@ block feet
   script(src='/views/account/index.min.js?#{cacheBreaker}')
 
 block body
-  div.row
-    div.col-sm-6
-      div.page-header
-        h1 My Account
-      div.row
-        div.col-sm-4
-          div.well.stat
-            div.stat-value.day-of-year --
-            div.stat-label Day of Year
-        div.col-sm-4
-          div.well.stat
-            div.stat-value.day-of-month --
-            div.stat-label Day of Month
-        div.col-sm-4
-          div.well.stat
-            div.stat-value.week-of-year --
-            div.stat-label Week of Year
-      div.row
-        div.col-sm-4
-          div.well.stat
-            div.stat-value.day-of-week --
-            div.stat-label Day of Week
-        div.col-sm-4
-          div.well.stat
-            div.stat-value.week-year --
-            div.stat-label Week Year
-        div.col-sm-4
-          div.well.stat
-            div.stat-value.hour-of-day --
-            div.stat-label Hour of Day
-    div.col-sm-6.special
-      div.page-header
-        h1 Go Faster Everyday
-      i.fa.fa-dashboard.super-awesome
+ h1 WebRTC Testing
+ div#runTest
+  script(type='text/template', id='tmpl-runTest')
+   form
+    div.form-group(class="serverSelect")
+     label Server to Test:
+     select(name="server")
+      option Needs To install options from DB
+    div.form-group(class="serverSelect")
+     button.btn.btn-primary.btn-runTest(type="button", name="runTest") Run Test
+
+
+ h1 Add Server
+ div#createServer
+  script(type='text/template', id='tmpl-createServer')
+   form
+    div.form-group(class="serverType")
+     label Server Type:
+     select(name="serverType" id="serverTypeSelect")
+      option(val="stun") STUN
+      option(val="turn") TURN
+    div.form-group(class="serverAddress")
+     label Server Address:
+     input(name="serverAddress" id="serverAddress")
+    div.form-group(class!="serverUsername")
+     label Server username:
+     input(name="serverUsername" id="serverUsername")
+    div.form-group(class="serverPassword")
+     label Turn Password:
+     input(name="serverPassword" id="serverPassword")
+    div.form-group(class="submit")
+     button.btn.btn-primary.btn-createServer(type="button", name="createServer") Create Server
+

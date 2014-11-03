@@ -28,6 +28,7 @@
       this.model = new app.Signup();
       this.listenTo(this.model, 'sync', this.render);
       this.render();
+      console.log("BLAH");
     },
     render: function() {
       this.$el.html(this.template( this.model.attributes ));

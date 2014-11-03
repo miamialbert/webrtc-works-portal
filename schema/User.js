@@ -19,10 +19,7 @@ exports = module.exports = function(app, mongoose) {
     google: {},
     tumblr: {},
     search: [String],
-    stunServer: String,
-    turnServer: String,
-    turnUsername: String,
-    turnPassword: String
+
   });
   userSchema.methods.canPlayRoleOf = function(role) {
     if (role === "admin" && this.roles.admin) {

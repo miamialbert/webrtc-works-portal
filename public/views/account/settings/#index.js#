@@ -30,7 +30,6 @@
     },
     url: '/account/settings/',
     parse: function(response) {
-    console.log(response);
       if (response.account) {
         app.mainView.account.set(response.account);
         delete response.account;
@@ -47,7 +46,11 @@
       errors: [],
       errfor: {},
       username: '',
-      email: ''
+      email: '',
+      stunServer: '',
+      turnServer: '',
+      turnUsername: '',
+      turnPassword: ''
     },
     url: '/account/settings/identity/',
     parse: function(response) {
@@ -142,7 +145,11 @@
       this.model.set({
         _id: app.mainView.user.id,
         username: app.mainView.user.get('username'),
-        email: app.mainView.user.get('email')
+        email: app.mainView.user.get('email'),
+	stunServer: app.mainView.user.get('stunServer'),
+	turnServer: app.mainView.user.get('turnServer'),
+	turnUsername: app.mainView.user.get('turnUsername'),
+	turnPassword: app.mainView.user.get('turnPassword')
       });
     },
     render: function() {
@@ -157,7 +164,11 @@
     update: function() {
       this.model.save({
         username: this.$el.find('[name="username"]').val(),
-        email: this.$el.find('[name="email"]').val()
+        email: this.$el.find('[name="email"]').val(),
+	stunServer:  this.$el.find('[name="stunServer"]').val(),
+	turnServer: app.mainView.user.get('turnServer'),
+	turnUsername: app.mainView.user.get('turnUsername'),
+	turnPassword: app.mainView.user.get('turnPassword')
       });
     }
   });

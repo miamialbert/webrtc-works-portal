@@ -67,7 +67,7 @@ block body
       div.form-group(class!='<%- errfor.email ? "has-error" : "" %>')
         label Enter Your Email:
         input.form-control(type='text', name='email', value!='<%= email %>')
-        span <%- email %>
+        span <%- console.log(email) %>	
         span.help-block <%- errfor.email %>
       div.form-group(class!='<%- errfor.password ? "has-error" : "" %>')
         label Create a Password:

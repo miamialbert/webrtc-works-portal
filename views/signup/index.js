@@ -18,7 +18,6 @@ exports.init = function(req, res){
 
 exports.signup = function(req, res){
   var workflow = req.app.utility.workflow(req, res);
-  console.log(req.body);
   workflow.on('validate', function() {
     if (!req.body.username) {
       workflow.outcome.errfor.username = 'required';
@@ -91,10 +90,6 @@ exports.signup = function(req, res){
           req.body.username,
           req.body.email
         ],
-	stunServer: req.body.stunServer,
-	turnServer: req.body.turnServer,
-	turnUsername: req.body.turnUsername,
-	turnPassword: req.body.turnPassword
       };
       req.app.db.models.User.create(fieldsToSet, function(err, user) {
         if (err) {
