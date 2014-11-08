@@ -51,7 +51,7 @@
     }
   });
 
-  app.HeaderView = Backbone.View.extend({
+/* app.HeaderView = Backbone.View.extend({
     el: '#header',
     template: _.template( $('#tmpl-serverHeader').html() ),
     events: {
@@ -95,6 +95,45 @@
         });
       }
     }
+  });*/
+  app.HeaderView = Backbone.View.extend({
+  el: '#header',
+  template: _.template( $('#tmpl-serverHeader').html() ),
+  events: {
+      'submit form': 'preventSubmit',
+      'click .btn-createServer': 'createServer'
+  },
+      initialize: function() {
+        this.model = new app.Record();
+        this.listenTo(this.model, 'sync', this.render);
+        this.render();
+      },
+      render: function() {
+        this.$el.html(this.template( this.model.attributes ));
+      },
+      preventSubmit: function(event) {
+        event.preventDefault();
+      },
+      createServer: function() {
+        console.log("Doritios");
+        this.$el.find('.btn-signup').attr('disabled', true);
+        this.model.save({
+          username: "",
+          serverType: this.$el.find('[name="serverType"]').val(),
+          serverAddress: this.$el.find('[name="serverAddress"]').val(),
+          serverUsername: this.$el.find('[name="serverUsername"]').val(),
+          serverPassword: this.$el.find('[name="serverPassword"]').val(),
+        },{
+          success: function(model, response) {
+            if (response.success) {
+              location.href = '/servers/';
+            }
+            else {
+              model.set(response);
+            }
+          }
+        });
+      }
   });
 
   app.ResultsView = Backbone.View.extend({

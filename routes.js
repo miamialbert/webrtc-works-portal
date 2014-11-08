@@ -174,7 +174,8 @@ exports = module.exports = function(app, passport) {
 
   //servers
   app.get('/servers/', require('./views/servers/index').find);
-  app.post('servers/', require('./views/servers/index').create);
+  app.post('/servers/', require('./views/servers/index').createServer);
+
   app.get('/servers/:id/', require('./views/servers/index').read);
   app.put('/servers/:id/', require('./views/servers/index').update);
   app.delete('/servers/:id/', require('./views/servers/index').delete);

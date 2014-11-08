@@ -12,18 +12,30 @@ block feet
 block body
   div.row
     div.col-xs-12
-      div#header
+      div(id="header",style="display:inline;")
       div#filters
       div#results-table
       div#results-paging
 
   script(type='text/template', id='tmpl-serverHeader')
-    div.page-header
-      form.form-inline.pull-right
-        div.input-group
-          input.form-control(name='username', type='text', placeholder='enter a username', value!='')
-          button.btn.btn-primary.btn-add(type='button') Add New
-      h1 Servers
+    form
+      div.form-group(class="serverType")
+       label Server Type:
+       select(name="serverType" id="serverTypeSelect")
+        option(val="stun") STUN
+        option(val="turn") TURN
+      div.form-group(class="serverAddress")
+       label Server Address:
+       input(name="serverAddress" id="serverAddress")
+      div.form-group(class!="serverUsername")
+       label Server username:
+       input(name="serverUsername" id="serverUsername")
+      div.form-group(class="serverPassword")
+       label Turn Password:
+       input(name="serverPassword" id="serverPassword")
+      div.form-group(class="submit")
+       button.btn.btn-primary.btn-createServer(type="button", name="createServer") Create Server
+
 
   script(type='text/template', id='tmpl-filters')
     form.filters
