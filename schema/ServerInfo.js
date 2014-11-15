@@ -6,7 +6,7 @@ exports = module.exports = function(app, mongoose) {
     serverAddress: String,
     serverType: String,
     serverUsername: String,
-    serverPassword: String,
+    serverPassword: String
   });
   serverInfoSchema.set('autoIndex', (app.get('env') === 'development'));
    serverInfoSchema.plugin(require('./plugins/pagedFind'));

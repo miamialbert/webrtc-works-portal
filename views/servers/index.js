@@ -6,7 +6,8 @@ exports.find = function(req, res, next){
   req.query.page = req.query.page ? parseInt(req.query.page, null) : 1;
   req.query.sort = req.query.sort ? req.query.sort : '_id';
 
-  var filters = {};
+  /*TODO: Verify the username with the request is the username tied to the session Or at least verify the security of this method.*/
+  var filters = {username: req.user.username};
   if (req.query.serverAddress) {
     filters.serverAddress = new RegExp('^.*?'+ req.query.serverAddress +'.*$', 'i');
   }
@@ -25,7 +26,7 @@ exports.find = function(req, res, next){
 
   req.app.db.models.ServerInfo.pagedFind({
     filters: filters,
-    keys: 'serverType serverAddress serverUsername serverPassword',
+    keys: 'username serverType serverAddress serverUsername serverPassword',
     limit: req.query.limit,
     page: req.query.page,
     sort: req.query.sort
@@ -99,6 +100,7 @@ exports.create = function(req, res, next){
 
   workflow.on('createServer', function() {
     var fieldsToSet = {
+      username: req.user.username,
       serverAddress: req.body.serverAddress,
       serverType: req.body.serverType,
       serverUsername: req.body.serverUsername,

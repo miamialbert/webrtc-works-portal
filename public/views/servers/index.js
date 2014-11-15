@@ -5,15 +5,16 @@
 
   app = app || {};
 
+
   app.Record = Backbone.Model.extend({
     idAttribute: '_id',
     defaults: {
       _id: undefined,
-      type: '',
+      username: '',
+      serverType: '',
       serverAddress: '',
       serverUsername: '',
-      serverPassword: '',
-      isActive: ''
+      serverPassword: ''
     },
     url: function() {
       return '/servers/'+ (this.isNew() ? '' : this.id +'/');
@@ -28,14 +29,15 @@
         pages: results.pages,
         items: results.items
       });
-      app.filterView.model.set(results.filters);
+      //app.filterView.model.set(results.filters);
       return results.data;
     }
   });
 
   app.Filter = Backbone.Model.extend({
     defaults: {
-      type: '',
+      username: '',
+      serverType: '',
       serverAddress: '',
       serverUsername:'',
       serverPassword:'',
@@ -51,51 +53,6 @@
     }
   });
 
-/* app.HeaderView = Backbone.View.extend({
-    el: '#header',
-    template: _.template( $('#tmpl-serverHeader').html() ),
-    events: {
-      'submit form': 'preventSubmit',
-      'keypress input[type="text"]': 'addNewOnEnter',
-      'click .btn-add': 'addNew'
-    },
-    initialize: function() {
-      this.model = new app.Record();
-      this.listenTo(this.model, 'change', this.render);
-      this.render();
-    },
-    render: function() {
-      this.$el.html(this.template( this.model.attributes ));
-    },
-    preventSubmit: function(event) {
-      event.preventDefault();
-    },
-    addNewOnEnter: function(event) {
-      if (event.keyCode !== 13) { return; }
-      event.preventDefault();
-      this.addNew();
-    },
-    addNew: function() {
-      if (this.$el.find('[name="username"]').val() === '') {
-        alert('Please enter a username.');
-      }
-      else {
-        this.model.save({
-          username: this.$el.find('[name="username"]').val()
-        },{
-          success: function(model, response) {
-            if (response.success) {
-              model.id = response.record._id;
-              location.href = model.url();
-            }
-            else {
-              alert(response.errors.join('\n'));
-            }
-          }
-        });
-      }
-    }
-  });*/
   app.HeaderView = Backbone.View.extend({
   el: '#header',
   template: _.template( $('#tmpl-serverHeader').html() ),
@@ -115,14 +72,13 @@
         event.preventDefault();
       },
       createServer: function() {
-        console.log("Doritios");
         this.$el.find('.btn-signup').attr('disabled', true);
         this.model.save({
           username: "",
           serverType: this.$el.find('[name="serverType"]').val(),
           serverAddress: this.$el.find('[name="serverAddress"]').val(),
           serverUsername: this.$el.find('[name="serverUsername"]').val(),
-          serverPassword: this.$el.find('[name="serverPassword"]').val(),
+          serverPassword: this.$el.find('[name="serverPassword"]').val()
         },{
           success: function(model, response) {
             if (response.success) {
@@ -140,7 +96,7 @@
     el: '#results-table',
     template: _.template( $('#tmpl-serverResults-table').html() ),
     initialize: function() {
-      this.collection = new app.RecordCollection( app.mainView.results.data );
+      this.collection = new app.RecordCollection( app.mainView.results.data);
       this.listenTo(this.collection, 'reset', this.render);
       this.render();
     },
@@ -148,6 +104,7 @@
       this.$el.html( this.template() );
 
       var frag = document.createDocumentFragment();
+
       this.collection.each(function(record) {
         var view = new app.ResultsRowView({ model: record });
         frag.appendChild(view.render().el);
@@ -252,7 +209,7 @@
 
       app.headerView = new app.HeaderView();
       app.resultsView = new app.ResultsView();
-      app.filterView = new app.FilterView();
+//      app.filterView = new app.FilterView();
       app.pagingView = new app.PagingView();
     }
   });
