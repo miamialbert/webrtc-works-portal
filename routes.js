@@ -180,6 +180,13 @@ exports = module.exports = function(app, passport) {
   app.put('/servers/:id/', require('./views/servers/index').update);
   app.delete('/servers/:id/', require('./views/servers/index').delete);
 
+  //tests
+  app.get('/tests/', require('./views/tests/index').find);
+  app.get('/tests/:id/', require('./views/tests/index').selectServer);
+
+  app.get('/tests/:id/', require('./views/tests/index').read);
+  app.delete('/tests/:id/', require('./views/tests/index').delete);
+
 
   //route not found
   app.all('*', require('./views/http/index').http404);

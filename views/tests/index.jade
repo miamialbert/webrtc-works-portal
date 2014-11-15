@@ -1,13 +1,10 @@
 extends ../../layouts/account
 
 block head
-  title Manage Servers
-
-block neck
-  link(rel='stylesheet', href='/views/servers/index.min.css?#{cacheBreaker}')
+  title Manage Tests
 
 block feet
-  script(src='/views/servers/index.min.js?#{cacheBreaker}')
+  script(src='/views/tests/index.min.js?#{cacheBreaker}')
 
 block body
   div.row
@@ -16,26 +13,6 @@ block body
       div#filters
       div#results-table
       div#results-paging
-
-  script(type='text/template', id='tmpl-serverHeader')
-    form
-      div.form-group(class="serverType")
-       label Server Type:
-       select(name="serverType" id="serverTypeSelect")
-        option(val="stun") STUN
-        option(val="turn") TURN
-      div.form-group(class="serverAddress")
-       label Server Address:
-       input(name="serverAddress" id="serverAddress")
-      div.form-group(class!="serverUsername")
-       label Server username:
-       input(name="serverUsername" id="serverUsername")
-      div.form-group(class="serverPassword")
-       label Turn Password:
-       input(name="serverPassword" id="serverPassword")
-      div.form-group(class="submit")
-       button.btn.btn-primary.btn-createServer(type="button", name="createServer") Create Server
-
 
   script(type='text/template', id='tmpl-filters')
     form.filters
@@ -58,34 +35,32 @@ block body
             option(value='100') 100 items
 
 
-  script(type='text/template', id='tmpl-serverResults-table')
+  script(type='text/template', id='tmpl-testResults-table')
     table.table.table-striped
       thead
         tr
           th
-          th Type
-          th.stretch Address
-          th Username
-          th Password
-          //th Id
-          th Test
+          th Server Address
+          th Outcome
+          th Probably
+          th More
+          th Retest?
       tbody#results-rows
 
-  script(type='text/template', id='tmpl-serverResults-row')
+  script(type='text/template', id='tmpl-testResults-row')
     td
       input.btn.btn-default.btn-sm.btn-details(type='button', value='Edit')
     td <%= serverType %>
-    td <%= serverAddress %>
-    td <%= serverUsername %>
-    td <%= serverPassword %>
-    //td <%= _id %>
+    td <%= outcome %>
+    td <%= Probably %>
+    td <%= More %>
     //TODO: Make this button work.
     td
-     button Run Test
+     button Retest
 
-  script(type='text/template', id='tmpl-serverResults-empty-row')
+  script(type='text/template', id='tmpl-testResults-empty-row')
     tr
-      td(colspan='5') No servers have been added. Please use the above form to create a server.
+      td(colspan='6') No tests to display. Go to the Servers page to run a test.
 
   script(type='text/template', id='tmpl-results-paging')
     div.well

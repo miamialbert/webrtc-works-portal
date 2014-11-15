@@ -1,0 +1,74 @@
+extends ../../layouts/account
+
+block head
+  title Servers / Details
+
+block feet
+  script(src='/views/servers/details.min.js?#{cacheBreaker}')
+
+block body
+  div.row
+    div.col-xs-12
+      div#header
+      div#serverEdit
+      div#delete
+
+  script(type='text/template', id='tmpl-header')
+    div.page-header
+      h1
+        a(href='/servers/') Servers
+        |  / <%= serverAddress %>
+
+  script(type='text/template', id='tmpl-serverEdit')
+    fieldset
+      legend Sever Information
+      div.alerts
+        |<% _.each(errors, function(err) { %>
+        div.alert.alert-danger.alert-dismissable
+          button.close(type='button', data-dismiss='alert') &times;
+          |<%- err %>
+        |<% }); %>
+        |<% if (success) { %>
+        div.alert.alert-info.alert-dismissable
+          button.close(type='button', data-dismiss='alert') &times;
+          | Changes have been saved.
+        |<% } %>
+      div.form-group(class!='<%- errfor.serverType ? "has-error" : "" %>')
+        label Server Type:
+        select.form-control(name='serverType')
+          option(value='STUN') STUN
+          option(value='TURN') TURN
+        span.help-block <%- errfor.serverType %>
+      div.form-group(class!='<%- errfor.serverAddress ? "has-error" : "" %>')
+        label Server Address:
+        input.form-control(type='text', name='serverAddress', value!='<% serverAddress %>')
+        span.help-block <%- errfor.serverAddress %>
+      div.form-group(class!='<%- errfor.serverUsername ? "has-error" : "" %>')
+        label Server Username:
+        input.form-control(type='text', name='serverUsername', value!='<% serverUsername %>')
+        span.help-block <%- errfor.serverUsername %>
+      div.form-group(class!='<%- errfor.serverPassword ? "has-error" : "" %>')
+        label Server Password:
+        input.form-control(type='text', name='serverPassword', value!='<% serverPassword %>')
+        span.help-block <%- errfor.serverPassword %>
+      div.form-group
+        button.btn.btn-primary.btn-update(type='button') Update
+
+  script(type='text/template', id='tmpl-delete')
+    fieldset
+      legend Danger Zone
+      div.alerts
+        |<% _.each(errors, function(err) { %>
+        div.alert.alert-danger.alert-dismissable
+          button.close(type='button', data-dismiss='alert') &times;
+          |<%- err %>
+        |<% }); %>
+      div.form-group
+        span.help-block
+          span.label.label-danger If you do this, it cannot be undone.
+          |&nbsp;
+          span.text-muted You may also create orphaned document relationships too.
+      div.form-group
+        button.btn.btn-danger.btn-delete(type='button') Delete
+
+  script(type='text/template', id='data-record') !{data.record}
